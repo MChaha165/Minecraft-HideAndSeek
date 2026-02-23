@@ -1,0 +1,19 @@
+name: HideAndSeek
+version: ${revision}
+main: com.mchaha165.hideandseek.HideAndSeek
+api-version: 1.20
+author: MChaha165  # 你的名字
+website: https://github.com/你的账号/HideAndSeek  # 你的项目地址
+description: 一款功能丰富的躲猫猫插件，支持区域扫描、随机伪装、猎人延迟等特性。
+commands:
+  hs:
+    description: 躲猫猫管理命令
+    usage: |
+      §e/<command> start §7- 开始游戏，给等待池玩家发放道具
+      §e/<command> give [玩家] §7- 给指定玩家（或自己）变身道具
+      §e/<command> undisguise [玩家] §7- 强制解除指定玩家（或自己）的伪装
+    aliases: [hideandseek]
+permissions:
+  hideandseek.admin:
+    description: 允许使用所有躲猫猫管理命令
+    default: op

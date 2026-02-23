@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mchaha165</groupId>
+    <artifactId>HideAndSeek</artifactId>
+    <version>${revision}</version>
+
+    <properties>
+        <revision>1.0.5</revision>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <adventure.version>4.17.0</adventure.version>
+        <adventure-platform.version>4.3.3</adventure-platform.version>
+    </properties>
+
+    <build>
+        <resources>
+            <!-- 只对 plugin.yml 开启过滤，用于替换版本号 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+            <!-- 其他资源（语言文件、config.yml 等）不过滤 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>plugin.yml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <!-- 排除 META-INF 文件（避免清单合并冲突） -->
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <!-- 排除旧的 IntelliJ 注解类 -->
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>org/intellij/lang/annotations/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <!-- 新增：排除 JetBrains 注解类 -->
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>org/jetbrains/annotations/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <!-- 重命名包，避免与其他插件冲突 -->
+                            <relocations>
+                                <relocation>
+                                    <pattern>net.kyori</pattern>
+                                    <shadedPattern>com.mchaha165.hideandseek.libs.kyori</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>mohist</id>
+            <url>https://maven.mohistmc.com/</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.mohistmc</groupId>
+            <artifactId>mohistdev</artifactId>
+            <version>1.20.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adventure API -->
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>${adventure.version}</version>
+        </dependency>
+        <!-- Adventure Bukkit 平台适配器 -->
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>${adventure-platform.version}</version>
+        </dependency>
+        <!-- 可选：MiniMessage 支持，方便写彩色文本 -->
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-minimessage</artifactId>
+            <version>${adventure.version}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>
