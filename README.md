@@ -108,7 +108,9 @@ MChaha165
 GitHub: MChaha165
 
 Project: https://github.com/MChaha165/Minecraft-HideAndSeek
+
 Bilibili：https://space.bilibili.com/3546665524922590
+
 爱发电: https://afdian.com/a/MChaha165
 
 <h1 style="font-size: 3em;"> 🇨🇳 中文介绍</h1>
@@ -212,9 +214,12 @@ MChaha165
 GitHub：MChaha165
 
 项目地址：https://github.com/MChaha165/Minecraft-HideAndSeek
+
 哔哩哔哩：https://space.bilibili.com/3546665524922590
+
 爱发电：https://afdian.com/a/MChaha165
 
 📄 License
 This project is protected by copyright law. All rights reserved.
 本代码受著作权法保护，保留所有权利。未经作者书面许可，不得用于商业用途。
+
